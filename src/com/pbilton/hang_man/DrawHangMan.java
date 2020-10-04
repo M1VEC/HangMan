@@ -2,7 +2,7 @@ package com.pbilton.hang_man;
 
 public class DrawHangMan {
 
-    public void printMan(int n){
+    public static void printMan(int n){
         if (n == 1)
             error1();
         else if (n == 2)
@@ -27,23 +27,23 @@ public class DrawHangMan {
             error11();
     }
 
-    private void error1(){
+    private static void error1(){
         System.out.println("   ______");
     }
 
-    private void error2(){
+    private static void error2(){
         System.out.println("  |");
         System.out.println("  |______");
     }
 
-    private void error3(){
+    private static void error3(){
         System.out.println("  |");
         System.out.println("  |");
         System.out.println("  |");
         System.out.println("  |______");
     }
 
-    private void error4(){
+    private static void error4(){
         System.out.println("   ____");
         System.out.println("  |");
         System.out.println("  |");
@@ -51,7 +51,7 @@ public class DrawHangMan {
         System.out.println("  |______");
     }
 
-    private void error5(){
+    private static void error5(){
         System.out.println("   ____");
         System.out.println("  |   |");
         System.out.println("  |");
@@ -59,7 +59,7 @@ public class DrawHangMan {
         System.out.println("  |______");
     }
 
-    private void error6(){
+    private static void error6(){
         System.out.println("   ____");
         System.out.println("  |   |O");
         System.out.println("  |");
@@ -67,7 +67,7 @@ public class DrawHangMan {
         System.out.println("  |______");
     }
 
-    private void error7(){
+    private static void error7(){
         System.out.println("   ____");
         System.out.println("  |   |O");
         System.out.println("  |    |");
@@ -75,7 +75,7 @@ public class DrawHangMan {
         System.out.println("  |______");
     }
 
-    private void error8(){
+    private static void error8(){
         System.out.println("   ____");
         System.out.println("  |   |O");
         System.out.println("  |   /|");
@@ -83,7 +83,7 @@ public class DrawHangMan {
         System.out.println("  |______");
     }
 
-    private void error9(){
+    private static void error9(){
         System.out.println("   ____");
         System.out.println("  |   |O");
         System.out.println("  |   /|\\");
@@ -91,7 +91,7 @@ public class DrawHangMan {
         System.out.println("  |______");
     }
 
-    private void error10(){
+    private static void error10(){
         System.out.println("   ____");
         System.out.println("  |   |O");
         System.out.println("  |   /|\\");
@@ -99,7 +99,7 @@ public class DrawHangMan {
         System.out.println("  |______");
     }
 
-    private void error11(){
+    private static void error11(){
         System.out.println("   ____");
         System.out.println("  |   |O");
         System.out.println("  |   /|\\");

@@ -6,31 +6,46 @@ import java.util.List;
 import java.util.Random;
 
 public class Selection {
-    private static String movie = "C:\\Users\\phili\\IdeaProjects\\hang_man\\movieSelection";
-    private static File file = new File(movie);
+    private final String category;
     private String[] source;
     private String selection;
+    private File file;
 
-    private void filelist() throws IOException {
+    public Selection(String category) {
+        this.category = category;
+    }
+
+    private String[] setFile(){
+        final String dir = System.getProperty("user.dir");
+        if (category.equals("movies")) {
+            file = new File(dir + "\\movieSelection");
+        }
+        return readFile();
+    }
+
+    private String[] readFile()  {
         List<String> lines = new ArrayList<String>();
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(file));
             String st;
-
-            while((st = reader.readLine()) != null)
+            while ((st = reader.readLine()) != null)
                 lines.add(st);
             reader.close();
             source = lines.toArray(new String[]{});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return source;
     }
 
-    private String randomSelection() throws IOException {
-        filelist();
-        int random = new Random().nextInt(source.length);
+    private String randomSelection() {
+        int random = new Random().nextInt(setFile().length);
         selection = source[random];
         return selection;
     }
 
-    public String getSelection() throws IOException {
+    public String getSelection() {
         return randomSelection();
     }
 }
