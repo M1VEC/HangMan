@@ -4,8 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
         String category = UserInterface.selectCat();
+
         Selection selection = new Selection(category);
-        String setSelection = selection.getSelection();
-        System.out.println(setSelection);
+        selection.setSelection();
+        
+        System.out.println(selection.getAnswer());
     }
 }

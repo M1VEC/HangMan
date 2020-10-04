@@ -9,8 +9,15 @@ public class testHangMan {
     Selection movie = new Selection(category);
 
     @Test
-    public void testList() {
-        System.out.println(movie.getSelection());
+    public void testAnswer() {
+        movie.setSelection();
+        System.out.println(movie.getAnswer());
+    }
+
+    @Test
+    public void testHint() {
+        movie.setSelection();
+        System.out.println(movie.getHint());
     }
 
     @Test
