@@ -7,7 +7,8 @@ public class Main {
 
         Selection selection = new Selection(category);
         selection.setSelection();
-        
-        System.out.println(selection.getAnswer());
+
+        PlayGame playGame = new PlayGame(selection);
+        playGame.setgame();
     }
 }

@@ -9,7 +9,8 @@ public class UserInterface {
         System.out.println("Category");
         System.out.println("movies");
         System.out.println("Please select a category: ");
-        String category= scanner.next();
+//        String category= scanner.next();
+        String category = "movies";
         return category;
     }
 }
