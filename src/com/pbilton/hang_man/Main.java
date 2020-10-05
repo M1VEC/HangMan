@@ -9,6 +9,6 @@ public class Main {
         selection.setSelection();
 
         PlayGame playGame = new PlayGame(selection);
-        playGame.setgame();
+        playGame.play();
     }
 }

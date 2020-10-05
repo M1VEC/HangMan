@@ -24,4 +24,9 @@ public class testHangMan {
     public void testDraw(){
     DrawHangMan.printMan(5);
     }
+
+    @Test
+    public void testValidate(){
+
+    }
 }
