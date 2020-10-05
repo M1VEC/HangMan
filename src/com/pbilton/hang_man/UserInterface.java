@@ -14,9 +14,10 @@ public class UserInterface {
         return category;
     }
 
-    public static String enterLetter(){
+    public static char enterLetter(){
         System.out.print("\nPlease enter your next letter: ");
         String input = scanner.next().toUpperCase();
-        return input;
+        char[] temp = input.toCharArray();
+        return temp[0];
     }
 }
