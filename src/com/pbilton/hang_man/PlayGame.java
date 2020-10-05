@@ -5,7 +5,6 @@ public class PlayGame {
     private String hint;
     private char[] answer;
     private char[] userAnswer;
-//    private String[] available = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private char[] available = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
     private char guess;
     private int wrongGuess = 0;
@@ -23,16 +22,28 @@ public class PlayGame {
             guess = UserInterface.enterLetter();
             validGuess = validateGuess();
             if (!validGuess)
-                System.out.print("Please enter a letter that has not been used before");
+                System.out.print("Please enter a valid letter! ");
         }
         printAlphabet();
         compare();
+        System.out.println();
     }
 
-    public void compare() {
+    private void correctGuess(int n){
+        userAnswer[n] = guess;
+    }
+
+    private void inCorrectGuess(){
+        wrongGuess = wrongGuess++;
+        DrawHangMan.printMan(wrongGuess);
+    }
+
+    private void compare() {
         for(int n = 0; n < answer.length; n++){
             if(guess == answer[n])
-                System.out.println("\n"+guess);
+                correctGuess(n);
+            else
+                inCorrectGuess();//need it to wait until loop is finished
         }
         //compare guess to answer. If answer contains guess, replace _ with guess
         //else wrongGuess +1 and draw hangman
@@ -43,7 +54,6 @@ public class PlayGame {
         printAlphabet();
         System.out.println("\n    " + new String(userAnswer));
         System.out.println( new String(answer));
-
     }
 
     private void printAlphabet() {
