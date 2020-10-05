@@ -15,7 +15,6 @@ public class UserInterface {
     }
 
     public static String enterLetter(){
-        System.out.println();
         System.out.print("\nPlease enter your next letter: ");
         String input = scanner.next().toUpperCase();
         return input;
