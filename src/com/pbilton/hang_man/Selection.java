@@ -46,7 +46,7 @@ public class Selection {
         selection = source[random];
 
         String[] split = selection.split("-");
-        answer = split[0];
+        answer = split[0].trim();
         hint = split[1].trim();
     }
 
