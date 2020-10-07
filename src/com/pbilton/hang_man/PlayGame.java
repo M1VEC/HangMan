@@ -10,6 +10,7 @@ public class PlayGame {
     private int wrongGuess = 0;
     private int correctGuess = 0;
     private boolean validGuess;
+    private boolean endGame = false;
 
     public PlayGame(Selection selection) {
         this.answer = selection.getAnswer().toUpperCase().toCharArray();
@@ -19,17 +20,24 @@ public class PlayGame {
 
     public void play() {
         setGame();
-        while (!validGuess) {
-            guess = UserInterface.enterLetter();
-            validGuess = validateGuess();
-            if (!validGuess)
-                UserInterface.displayMessage("Please enter a valid letter! ");
-        }
-        UserInterface.displayAlphabet(available);
-        compare();
+        while(!endGame) {
+            validGuess= false;
+            while (!validGuess) {
+                guess = UserInterface.enterLetter();
+                validGuess = validateGuess();
+                if (!validGuess)
+                    UserInterface.displayMessage("Please enter a valid letter! ");
+            }
+            UserInterface.displayAlphabet(available);
+            compare();
 
-        UserInterface.displayUserAnswer(userAnswer);
-        System.out.println();
+            UserInterface.displayUserAnswer(userAnswer);
+            System.out.println();
+            if(correctGuess == answer.length)
+                endGame = true;
+            else if(wrongGuess == 11)
+                endGame = true;
+        }
     }
 
     private void compare() {
