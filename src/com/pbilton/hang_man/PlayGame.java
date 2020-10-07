@@ -11,11 +11,13 @@ public class PlayGame {
     private int correctGuess = 0;
     private boolean validGuess;
     private boolean endGame = false;
+    private UserInteraction userInteraction;
 
-    public PlayGame(Selection selection) {
+    public PlayGame(Selection selection, UserInteraction userInteraction) {
+        this.userInteraction = userInteraction;
         this.answer = selection.getAnswer().toUpperCase().toCharArray();
         this.hint = selection.getHint();
-        this.userAnswer = selection.getAnswer().replaceAll("\\w", "_").toCharArray();
+        userAnswer = selection.getAnswer().replaceAll("\\w", "_").toCharArray();
     }
 
     public void play() {
@@ -23,27 +25,27 @@ public class PlayGame {
         while(!endGame) {
             validGuess= false;
             while (!validGuess) {
-                guess = UserInterface.enterLetter();
+                guess = userInteraction.enterLetter();
                 validGuess = validateGuess();
                 if (!validGuess)
-                    UserInterface.displayMessage("Please enter a valid letter! ");
+                    userInteraction.displayMessage("Please enter a valid letter! ");
             }
             compare();
-            UserInterface.displayUserAnswer(userAnswer);
+            userInteraction.displayUserAnswer(userAnswer);
 
             endGame = endGame();
             if(endGame == true)
                 break;
             else
-                UserInterface.displayAlphabet(available);
+                userInteraction.displayAlphabet(available);
         }
     }
 
     private void setGame() {
         System.out.println();
         correctGuess = new String(answer).replaceAll("[^ ]", "").length();
-        UserInterface.displayAlphabet(available);
-        UserInterface.displayUserAnswer(userAnswer);
+        userInteraction.displayAlphabet(available);
+        userInteraction.displayUserAnswer(userAnswer);
     }
 
     private boolean validateGuess() {
@@ -73,13 +75,13 @@ public class PlayGame {
 
     private boolean endGame(){
         if(correctGuess == answer.length){
-            UserInterface.displayMessage("    Congratulations!");
+            userInteraction.displayMessage("    Congratulations!");
             return true;
         }
         else if(wrongGuess == 9){
-            UserInterface.displayMessage("  Answer is");
-            UserInterface.displayAnswer(answer);
-            UserInterface.displayMessage("  Game Over!");
+            userInteraction.displayMessage("  Answer is");
+            userInteraction.displayAnswer(answer);
+            userInteraction.displayMessage("  Game Over!");
             return true;
         }
         else

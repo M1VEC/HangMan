@@ -3,12 +3,13 @@ package com.pbilton.hang_man;
 public class Main {
 
     public static void main(String[] args) {
-        String category = UserInterface.selectCat();
+        UserInteraction userInteraction = new UserInteraction();
+        String category = userInteraction.selectCat();
 
         Selection selection = new Selection(category);
         selection.setSelection();
 
-        PlayGame playGame = new PlayGame(selection);
+        PlayGame playGame = new PlayGame(selection, userInteraction);
         playGame.play();
     }
 }
