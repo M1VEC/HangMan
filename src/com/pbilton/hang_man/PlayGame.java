@@ -8,6 +8,7 @@ public class PlayGame {
     private char[] available = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
     private char guess;
     private int wrongGuess = 0;
+    private int correctGuess = 0;
     private boolean validGuess;
 
     public PlayGame(Selection selection) {
@@ -22,44 +23,35 @@ public class PlayGame {
             guess = UserInterface.enterLetter();
             validGuess = validateGuess();
             if (!validGuess)
-                System.out.print("Please enter a valid letter! ");
+                UserInterface.displayMessage("Please enter a valid letter! ");
         }
-        printAlphabet();
+        UserInterface.displayAlphabet(available);
         compare();
+
+        UserInterface.displayUserAnswer(userAnswer);
         System.out.println();
     }
 
-    private void correctGuess(int n){
-        userAnswer[n] = guess;
-    }
-
-    private void inCorrectGuess(){
-        wrongGuess = wrongGuess++;
-        DrawHangMan.printMan(wrongGuess);
-    }
-
     private void compare() {
+        boolean letterFound = false;
         for(int n = 0; n < answer.length; n++){
-            if(guess == answer[n])
-                correctGuess(n);
-            else
-                inCorrectGuess();//need it to wait until loop is finished
+            if(guess == answer[n]){
+                userAnswer[n] = guess;
+                correctGuess++;
+                letterFound = true;
+            }
         }
-        //compare guess to answer. If answer contains guess, replace _ with guess
-        //else wrongGuess +1 and draw hangman
+        if(letterFound ==  false) {
+            wrongGuess++;
+            DrawHangMan.printMan(wrongGuess);
+        }
     }
 
     private void setGame() {
         System.out.println();
-        printAlphabet();
-        System.out.println("\n    " + new String(userAnswer));
-        System.out.println( new String(answer));
-    }
-
-    private void printAlphabet() {
-        for (char letter : available) {
-            System.out.print(letter + " ");
-        }
+        UserInterface.displayAlphabet(available);
+        UserInterface.displayUserAnswer(userAnswer);
+        UserInterface.displayUserAnswer(answer);
     }
 
     private boolean validateGuess() {

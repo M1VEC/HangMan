@@ -3,6 +3,7 @@ package com.pbilton.hang_man;
 public class DrawHangMan {
 
     public static void printMan(int n){
+        System.out.println();
         if (n == 1)
             error1();
         else if (n == 2)
