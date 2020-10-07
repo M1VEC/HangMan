@@ -15,13 +15,14 @@ public class UserInterface {
     }
 
     public static char enterLetter() {
-        System.out.print("\nPlease enter your next letter: ");
+        System.out.print("\n    Please enter your next letter: ");
         String input = scanner.next().toUpperCase();
         char[] temp = input.toCharArray();
         return temp[0];
     }
 
     public static void displayAlphabet(char[] available) {
+        System.out.println("\n    Available characters");
         for (char letter : available) {
             System.out.print(letter + " ");
         }

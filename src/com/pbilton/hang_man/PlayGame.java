@@ -28,16 +28,32 @@ public class PlayGame {
                 if (!validGuess)
                     UserInterface.displayMessage("Please enter a valid letter! ");
             }
-            UserInterface.displayAlphabet(available);
             compare();
-
             UserInterface.displayUserAnswer(userAnswer);
-            System.out.println();
-            if(correctGuess == answer.length)
-                endGame = true;
-            else if(wrongGuess == 11)
-                endGame = true;
+
+            endGame = endGame();
+            if(endGame == true)
+                break;
+            else
+                UserInterface.displayAlphabet(available);
         }
+    }
+
+    private void setGame() {
+        System.out.println();
+        correctGuess = new String(answer).replaceAll("[^ ]", "").length();
+        UserInterface.displayAlphabet(available);
+        UserInterface.displayUserAnswer(userAnswer);
+    }
+
+    private boolean validateGuess() {
+        for(int i = 0; i < available.length; i++) {
+            if(available[i] == guess){
+                available[i] = '_';
+                return true;
+            }
+        }
+        return false;
     }
 
     private void compare() {
@@ -55,21 +71,19 @@ public class PlayGame {
         }
     }
 
-    private void setGame() {
-        System.out.println();
-        UserInterface.displayAlphabet(available);
-        UserInterface.displayUserAnswer(userAnswer);
-        UserInterface.displayUserAnswer(answer);
-    }
-
-    private boolean validateGuess() {
-        for(int i = 0; i < available.length; i++) {
-            if(available[i] == guess){
-                available[i] = '_';
-                return true;
-            }
+    private boolean endGame(){
+        if(correctGuess == answer.length){
+            UserInterface.displayMessage("    Congratulations!");
+            return true;
         }
-        return false;
+        else if(wrongGuess == 9){
+            UserInterface.displayMessage("  Answer is");
+            UserInterface.displayAnswer(answer);
+            UserInterface.displayMessage("  Game Over!");
+            return true;
+        }
+        else
+            return false;
     }
 }
 

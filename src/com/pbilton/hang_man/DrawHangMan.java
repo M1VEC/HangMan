@@ -4,6 +4,8 @@ public class DrawHangMan {
 
     public static void printMan(int n){
         System.out.println();
+        System.out.println("****************************");
+        System.out.println("    Incorrect Guess");
         if (n == 1)
             error1();
         else if (n == 2)
@@ -22,89 +24,76 @@ public class DrawHangMan {
             error8();
         else if (n == 9)
             error9();
-        else if (n == 10)
-            error10();
-        else if (n == 11)
-            error11();
+        System.out.println("****************************");
     }
 
     private static void error1(){
-        System.out.println("   ______");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("    ______");
     }
 
     private static void error2(){
-        System.out.println("  |");
-        System.out.println("  |______");
+        System.out.println("    |");
+        System.out.println("    |");
+        System.out.println("    |");
+        System.out.println("    |______");
     }
 
     private static void error3(){
-        System.out.println("  |");
-        System.out.println("  |");
-        System.out.println("  |");
-        System.out.println("  |______");
+        System.out.println("     ____");
+        System.out.println("    |   |");
+        System.out.println("    |");
+        System.out.println("    |");
+        System.out.println("    |______");
     }
 
     private static void error4(){
-        System.out.println("   ____");
-        System.out.println("  |");
-        System.out.println("  |");
-        System.out.println("  |");
-        System.out.println("  |______");
+        System.out.println("     ____");
+        System.out.println("    |   |O");
+        System.out.println("    |");
+        System.out.println("    |");
+        System.out.println("    |______");
     }
 
     private static void error5(){
-        System.out.println("   ____");
-        System.out.println("  |   |");
-        System.out.println("  |");
-        System.out.println("  |");
-        System.out.println("  |______");
+        System.out.println("     ____");
+        System.out.println("    |   |O");
+        System.out.println("    |    |");
+        System.out.println("    |");
+        System.out.println("    |______");
     }
 
     private static void error6(){
-        System.out.println("   ____");
-        System.out.println("  |   |O");
-        System.out.println("  |");
-        System.out.println("  |");
-        System.out.println("  |______");
+        System.out.println("     ____");
+        System.out.println("    |   |O");
+        System.out.println("    |   /|");
+        System.out.println("    |");
+        System.out.println("    |______");
     }
 
     private static void error7(){
-        System.out.println("   ____");
-        System.out.println("  |   |O");
-        System.out.println("  |    |");
-        System.out.println("  |");
-        System.out.println("  |______");
+        System.out.println("     ____");
+        System.out.println("    |   |O");
+        System.out.println("    |   /|\\");
+        System.out.println("    |");
+        System.out.println("    |______");
     }
 
     private static void error8(){
-        System.out.println("   ____");
-        System.out.println("  |   |O");
-        System.out.println("  |   /|");
-        System.out.println("  |");
-        System.out.println("  |______");
+        System.out.println("     ____");
+        System.out.println("    |   |O");
+        System.out.println("    |   /|\\");
+        System.out.println("    |   /");
+        System.out.println("    |______");
     }
 
     private static void error9(){
-        System.out.println("   ____");
-        System.out.println("  |   |O");
-        System.out.println("  |   /|\\");
-        System.out.println("  |");
-        System.out.println("  |______");
-    }
-
-    private static void error10(){
-        System.out.println("   ____");
-        System.out.println("  |   |O");
-        System.out.println("  |   /|\\");
-        System.out.println("  |   /");
-        System.out.println("  |______");
-    }
-
-    private static void error11(){
-        System.out.println("   ____");
-        System.out.println("  |   |O");
-        System.out.println("  |   /|\\");
-        System.out.println("  |   / \\");
-        System.out.println("  |______");
+        System.out.println("     ____");
+        System.out.println("    |   |O");
+        System.out.println("    |   /|\\");
+        System.out.println("    |   / \\");
+        System.out.println("    |______");
     }
 }
