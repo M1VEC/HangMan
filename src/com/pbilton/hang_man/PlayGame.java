@@ -31,13 +31,14 @@ public class PlayGame {
                     userInteraction.displayMessage("Please enter a valid letter! ");
             }
             compare();
-            userInteraction.displayUserAnswer(userAnswer);
-
             endGame = endGame();
+
             if(endGame == true)
                 break;
-            else
+            else{
+                userInteraction.displayUserAnswer(userAnswer);
                 userInteraction.displayAlphabet(available);
+            }
         }
     }
 

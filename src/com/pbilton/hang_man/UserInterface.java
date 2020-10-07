@@ -13,4 +13,6 @@ public interface UserInterface {
      void displayAnswer(char[] answer);
 
      void displayMessage(String message);
+
+     boolean playAgain();
 }

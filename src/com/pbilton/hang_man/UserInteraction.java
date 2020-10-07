@@ -45,4 +45,13 @@ public class UserInteraction implements UserInterface {
     public void displayMessage(String message) {
         System.out.println("\n" + message);
     }
+
+    @Override
+    public boolean playAgain() {
+        System.out.println("Would you like to play again? (Y or N)");
+        String play = scanner.next();
+        if (play.equalsIgnoreCase("Y"))
+            return true;
+        return false;
+    }
 }

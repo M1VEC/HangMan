@@ -3,13 +3,20 @@ package com.pbilton.hang_man;
 public class Main {
 
     public static void main(String[] args) {
-        UserInteraction userInteraction = new UserInteraction();
-        String category = userInteraction.selectCat();
+        UserInteraction userInteraction;
+        Selection selection;
+        PlayGame playGame;
+        
+        do {
+            userInteraction = new UserInteraction();
+            String category = userInteraction.selectCat();
 
-        Selection selection = new Selection(category);
-        selection.setSelection();
+            selection = new Selection(category);
+            selection.setSelection();
 
-        PlayGame playGame = new PlayGame(selection, userInteraction);
-        playGame.play();
+            playGame = new PlayGame(selection, userInteraction);
+            playGame.play();
+
+        } while (userInteraction.playAgain());
     }
 }
