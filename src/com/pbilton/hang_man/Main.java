@@ -6,7 +6,7 @@ public class Main {
         UserInteraction userInteraction;
         Selection selection;
         PlayGame playGame;
-        
+
         do {
             userInteraction = new UserInteraction();
             String category = userInteraction.selectCat();
@@ -14,7 +14,7 @@ public class Main {
             selection = new Selection(category);
             selection.setSelection();
 
-            playGame = new PlayGame(selection, userInteraction);
+            playGame = new PlayGame(userInteraction, selection.getAnswer(), selection.getHint());
             playGame.play();
 
         } while (userInteraction.playAgain());

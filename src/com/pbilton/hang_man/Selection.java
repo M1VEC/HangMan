@@ -10,8 +10,8 @@ public class Selection {
     private String[] source;
     private String selection;
     private File file;
-    private static String answer;
-    private static String hint;
+    private static char[] answer;
+    private static char[] hint;
 
     public Selection(String category) {
         this.category = category;
@@ -43,22 +43,22 @@ public class Selection {
 
     private void randomSelection() {
         int random = new Random().nextInt(setFile().length);
-        selection = source[random];
+        selection = source[random].toUpperCase();
 
         String[] split = selection.split("-");
-        answer = split[0].trim();
-        hint = split[1].trim();
+        answer = split[0].trim().toCharArray();
+        hint = split[1].trim().toCharArray();
     }
 
     public void setSelection(){
         randomSelection();
     }
 
-    public String getAnswer() {
+    public char[] getAnswer() {
         return answer;
     }
 
-    public String getHint() {
+    public char[] getHint() {
         return hint;
     }
 }
