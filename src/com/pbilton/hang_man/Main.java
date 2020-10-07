@@ -17,6 +17,7 @@ public class Main {
             playGame = new PlayGame(userInteraction, selection.getAnswer(), selection.getHint());
             playGame.play();
 
+
         } while (userInteraction.playAgain());
     }
 }

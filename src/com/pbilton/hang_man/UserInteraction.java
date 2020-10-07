@@ -11,6 +11,7 @@ public class UserInteraction implements UserInterface {
         System.out.println("movies");
         System.out.print("Please select a category: ");
 //        String category= scanner.next();
+        System.out.println();
         String category = "movies";
         return category;
     }
