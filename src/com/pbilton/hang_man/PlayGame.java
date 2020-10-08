@@ -33,27 +33,41 @@ public class PlayGame extends UserInteraction{
                 endGame = loseGame();
         }
     }
-
+    
     private void validateInput(){
         validInput = false;
         while (!validInput) {
-            guess = userInput();
-            for (int i = 0; i < available.length; i++) {
-                if (guess == available[i]) {
-                    available[i] = '_';
-                    validInput = true;
-                    break;
-                }
+            String userInput = getUserInput();
+            if (userInput.equalsIgnoreCase("hint"))
+                hint();
+            else if (userInput.equals(new String(answer))) {
+                winGame();
+                endGame = true;
+                break;
             }
-            if(!validInput)
-                userInteraction.displayMessage("Please enter a valid letter! ");
+            else
+                {
+                guess = userInput.charAt(0);
+                for (int i = 0; i < available.length; i++) {
+                    if (guess == available[i]) {
+                        available[i] = '_';
+                        validInput = true;
+                        break;
+                    }
+                }
+                if (!validInput)
+                    userInteraction.displayMessage("Please enter a valid letter! ");
+            }
         }
     }
 
-    private char userInput(){               //add code to allow the user to type hint or type the full answer
+    private void hint(){
+    }
+
+    private String getUserInput(){               //add code to allow the user to type hint or type the full answer
         userInteraction.displayUserAnswer(userAnswer);
         userInteraction.displayAlphabet(available);
-        return userInteraction.enterLetter();
+        return userInteraction.enterInput();
     }
 
     private void compareToAnswer() {

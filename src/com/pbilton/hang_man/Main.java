@@ -1,11 +1,11 @@
 package com.pbilton.hang_man;
 
 public class Main {
+    public static UserInteraction userInteraction;
+    public static Selection selection;
+    public static PlayGame playGame;
 
     public static void main(String[] args) {
-        UserInteraction userInteraction;
-        Selection selection;
-        PlayGame playGame;
 
         do {
             userInteraction = new UserInteraction();
@@ -16,7 +16,6 @@ public class Main {
 
             playGame = new PlayGame(userInteraction, selection.getAnswer(), selection.getHint());
             playGame.play();
-
 
         } while (userInteraction.playAgain());
     }

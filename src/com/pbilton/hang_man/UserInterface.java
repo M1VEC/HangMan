@@ -4,7 +4,7 @@ public interface UserInterface {
 
      String selectCat();
 
-     char enterLetter();
+     String enterInput();
 
      void displayAlphabet(char[] available);
 

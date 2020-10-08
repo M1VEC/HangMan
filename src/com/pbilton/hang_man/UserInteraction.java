@@ -17,11 +17,10 @@ public class UserInteraction implements UserInterface {
     }
 
     @Override
-    public char enterLetter() {
+    public String enterInput() {
         System.out.print("\n    Please enter your next letter: ");
-        String input = scanner.next().toUpperCase();
-        char[] temp = input.toCharArray();
-        return temp[0];
+        String input = scanner.nextLine().toUpperCase();
+        return input;
     }
 
     @Override
