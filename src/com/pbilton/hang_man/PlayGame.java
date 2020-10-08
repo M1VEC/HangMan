@@ -8,8 +8,8 @@ public class PlayGame extends UserInteraction{
     private char[] available = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private char guess;
-    private int wrongGuess = 0;
-    private int correctGuess = 0;
+    private int wrongGuessCount = 0;
+    private int correctGuessCount = 0;
     private final int maxWrong = 9;
     private boolean validInput;
     private boolean endGame = false;
@@ -20,15 +20,17 @@ public class PlayGame extends UserInteraction{
         this.answer = answer;
         this.hint = hint;
         userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray();
-        correctGuess = new String(answer).replaceAll("[^ ]", "").length();
+        correctGuessCount = new String(answer).replaceAll("[^ ]", "").length();
     }
 
     public void play() {
         while(!endGame) {
             validateInput();
             compareToAnswer();
-            if(endGame())
-                break;
+            if(correctGuessCount == answer.length)
+                endGame = winGame();
+            else if(wrongGuessCount == maxWrong)
+                endGame = loseGame();
         }
     }
 
@@ -59,30 +61,27 @@ public class PlayGame extends UserInteraction{
         for(int n = 0; n < answer.length; n++){
             if(guess == answer[n]){
                 userAnswer[n] = guess;
-                correctGuess++;
+                correctGuessCount++;
                 letterFound = true;
             }
         }
         if(letterFound == false) {
-            wrongGuess++;
-            DrawHangMan.printMan(wrongGuess);
+            wrongGuessCount++;
+            DrawHangMan.printMan(wrongGuessCount);
         }
     }
 
-    private boolean endGame(){
-        if(correctGuess == answer.length){
-            userInteraction.displayAnswer(answer);
-            userInteraction.displayMessage("    Congratulations!");
-            return true;
-        }
-        else if(wrongGuess == maxWrong){
-            userInteraction.displayMessage("  Answer is");
-            userInteraction.displayAnswer(answer);
-            userInteraction.displayMessage("  Game Over!");
-            return true;
-        }
-        else
-            return false;
+    private boolean winGame(){
+        userInteraction.displayAnswer(answer);
+        userInteraction.displayMessage("    Congratulations!");
+        return true;
+    }
+
+    private boolean loseGame(){
+        userInteraction.displayMessage("  Answer is");
+        userInteraction.displayAnswer(answer);
+        userInteraction.displayMessage("  Game Over!");
+        return true;
     }
 }
 
