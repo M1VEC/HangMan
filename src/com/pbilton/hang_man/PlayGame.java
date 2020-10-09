@@ -19,7 +19,7 @@ public class PlayGame extends UserInteraction{
         this.userInteraction = userInteraction;
         this.answer = answer;
         this.hint = hint;
-        userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray();
+        userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray(); // Copies the answer and replace all characters with _
     }
 
     public void play() {
@@ -37,8 +37,8 @@ public class PlayGame extends UserInteraction{
         validInput = false;
         while (!validInput) {
                 guess = getUserInput();
-                for (int i = 0; i < available.length; i++) {
-                    if (guess == available[i]) {
+                for (int i = 0; i < available.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
+                    if (guess == available[i]) {                        //to signify the character has been used and no longer available
                         available[i] = '_';
                         return true;
                     }
@@ -71,7 +71,7 @@ public class PlayGame extends UserInteraction{
     private void compareToAnswer(char guess) {
         boolean letterFound = false;
         for(int n = 0; n < answer.length; n++){
-            if(guess == answer[n]){
+            if(guess == answer[n]){                         //checks to see if the users guess is present in the answer at number n
                 userAnswer[n] = guess;
                 letterFound = true;
             }
