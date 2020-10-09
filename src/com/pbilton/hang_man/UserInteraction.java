@@ -10,7 +10,7 @@ public class UserInteraction implements UserInterface {
         System.out.println("        Welcome to Java HangMan!");
         System.out.println();
         System.out.println("    Find the hidden film from the available letters and numbers");
-        System.out.println("    If you need a hint then type \'!\' but be warned,");
+        System.out.println("    If you need a hint then type \'?\' but be warned,");
         System.out.println("    it will cost you a wrong guess!");
     }
 

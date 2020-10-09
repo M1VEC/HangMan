@@ -38,7 +38,7 @@ public class PlayGame extends UserInteraction{
         while (!validInput) {
                 guess = getUserInput();
                 for (int i = 0; i < available.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
-                    if (guess == available[i]) {                        //to signify the character has been used and no longer available
+                    if (guess == available[i] && guess != '_') {                        //to signify the character has been used and no longer available
                         available[i] = '_';
                         return true;
                     }
