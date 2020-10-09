@@ -9,9 +9,9 @@ public class Main {
 
         do {
             userInteraction = new UserInteraction();
-            String category = userInteraction.selectCat();
+            userInteraction.into();
 
-            selection = new Selection(category);
+            selection = new Selection("movies");
             selection.setSelection();
 
             playGame = new PlayGame(userInteraction, selection.getAnswer(), selection.getHint());

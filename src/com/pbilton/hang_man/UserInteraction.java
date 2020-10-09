@@ -3,24 +3,22 @@ package com.pbilton.hang_man;
 import java.util.Scanner;
 
 public class UserInteraction implements UserInterface {
-    private static Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
-    @Override
-    public String selectCat() {
-        System.out.println("Category");
-        System.out.println("movies");
-        System.out.print("Please select a category: ");
-//        String category= scanner.next();
+    public void into(){
+        System.out.println("----------------------");
+        System.out.println("        Welcome to Java HangMan!");
         System.out.println();
-        String category = "movies";
-        return category;
+        System.out.println("    Find the hidden film from the available letters and numbers");
+        System.out.println("    If you need a hint then type \'!\' but be warned,");
+        System.out.println("    it will cost you a wrong guess!");
     }
 
     @Override
-    public String enterInput() {
+    public char enterInput() {
         System.out.print("\n    Please enter your next letter: ");
         String input = scanner.nextLine().toUpperCase();
-        return input;
+        return input.charAt(0);
     }
 
     @Override

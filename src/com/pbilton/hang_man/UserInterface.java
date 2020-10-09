@@ -2,9 +2,7 @@ package com.pbilton.hang_man;
 
 public interface UserInterface {
 
-     String selectCat();
-
-     String enterInput();
+     char enterInput();
 
      void displayAlphabet(char[] available);
 

@@ -9,7 +9,7 @@ public class PlayGame extends UserInteraction{
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private char guess;
     private int wrongGuessCount = 0;
-    private int correctGuessCount = 0;
+    private int hintCount = 1;
     private final int maxWrong = 9;
     private boolean validInput;
     private boolean endGame = false;
@@ -20,62 +20,59 @@ public class PlayGame extends UserInteraction{
         this.answer = answer;
         this.hint = hint;
         userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray();
-        correctGuessCount = new String(answer).replaceAll("[^ ]", "").length();
     }
 
     public void play() {
         while(!endGame) {
-            validateInput();
-            compareToAnswer();
-            if(correctGuessCount == answer.length)
+            if(validateInput())
+                compareToAnswer(guess);
+            if(new String(userAnswer).equals(new String(answer)))
                 endGame = winGame();
             else if(wrongGuessCount == maxWrong)
                 endGame = loseGame();
         }
     }
-    
-    private void validateInput(){
+
+    private boolean validateInput(){
         validInput = false;
         while (!validInput) {
-            String userInput = getUserInput();
-            if (userInput.equalsIgnoreCase("hint"))
-                hint();
-            else if (userInput.equals(new String(answer))) {
-                winGame();
-                endGame = true;
-                break;
-            }
-            else
-                {
-                guess = userInput.charAt(0);
+                guess = getUserInput();
                 for (int i = 0; i < available.length; i++) {
                     if (guess == available[i]) {
                         available[i] = '_';
-                        validInput = true;
-                        break;
+                        return true;
                     }
                 }
-                if (!validInput)
-                    userInteraction.displayMessage("Please enter a valid letter! ");
+            if(guess == '?')
+                hint();
+            else if (!validInput)
+                userInteraction.displayMessage("Please enter a valid letter! ");
             }
-        }
+        return false;
     }
 
     private void hint(){
+        if(hintCount == 1){
+        wrongGuessCount++;
+        DrawHangMan.printMan(wrongGuessCount);
+        userInteraction.displayMessage(new String (hint));
+        hintCount--;
+        }
+        else
+            userInteraction.displayMessage("Maximum hint limit reached");
     }
 
-    private String getUserInput(){               //add code to allow the user to type hint or type the full answer
+    private char getUserInput(){
         userInteraction.displayUserAnswer(userAnswer);
         userInteraction.displayAlphabet(available);
         return userInteraction.enterInput();
     }
 
-    private void compareToAnswer() {
+    private void compareToAnswer(char guess) {
         boolean letterFound = false;
         for(int n = 0; n < answer.length; n++){
             if(guess == answer[n]){
                 userAnswer[n] = guess;
-                correctGuessCount++;
                 letterFound = true;
             }
         }

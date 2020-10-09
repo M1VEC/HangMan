@@ -13,8 +13,6 @@ It will at the end of every guess redraw the HangMan - draws after each incorrec
 
 It will allow the user to guess the film before the start of a new guess
 
-It could give the user one hint per movie
-
-It could keep track of the user's hi-score or leaderboard
+It could give the user one hint per movie - complete
 
 It should be expandable 
