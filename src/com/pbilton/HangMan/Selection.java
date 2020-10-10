@@ -20,6 +20,8 @@ public class Selection {
         if (category.equals("movies")) {
               fileSet = new File(dir + "\\movieSelection");
         }
+        else if (category.equals("actors"))
+            fileSet = new File(dir + "\\actorsSelection");
         return readFile(fileSet);
     }
 

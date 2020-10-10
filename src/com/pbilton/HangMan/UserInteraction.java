@@ -15,9 +15,20 @@ public class UserInteraction implements UserInterface {
     }
 
     @Override
+    public String selectCategory(){
+        System.out.println();
+        System.out.println("    Please select a category:");
+        System.out.println("        movies");
+        System.out.println("        actors");
+        System.out.print("    Selection : ");
+        String category = scanner.next().toLowerCase();
+        return category;
+    }
+
+    @Override
     public char enterInput() {
         System.out.print("\n    Please enter your next letter: ");
-        String input = scanner.nextLine().toUpperCase();
+        String input = scanner.next().toUpperCase();
         return input.charAt(0);
     }
 

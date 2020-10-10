@@ -10,7 +10,7 @@ public class Main {
             userInteraction.introduction();
 
             Selection selection = new Selection();
-            selection.setSelection("movies");
+            selection.setSelection(userInteraction.selectCategory());
             Game playGame = new Game(userInteraction, selection.getAnswer(), selection.getHint());
             playGame.playGame();
 

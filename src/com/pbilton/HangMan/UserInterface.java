@@ -2,6 +2,8 @@ package com.pbilton.HangMan;
 
 public interface UserInterface {
 
+     String selectCategory();
+
      char enterInput();
 
      void displayAlphabet(char[] available);
