@@ -1,45 +1,46 @@
-package com.pbilton.hang_man;
+package com.pbilton.HangMan;
 
-public class PlayGame extends UserInteraction{
+import java.util.Arrays;
 
-    private char[] hint;
+public class Game {
+
+    private final String hintString;
     private char[] answer;
     private char[] userAnswer;
-    private char[] available = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    private char[] availableCharacters = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private char guess;
     private int wrongGuessCount = 0;
-    private int hintCount = 1;
-    private final int maxWrong = 9;
-    private boolean validInput;
-    private boolean endGame = false;
+    private int hintCount = 0;
+    private static final int MAX_WRONG_GUESS_COUNT = 9;
     private UserInteraction userInteraction;
 
-    public PlayGame(UserInteraction userInteraction, char[] answer, char[] hint) {
+    public Game(UserInteraction userInteraction, char[] answer, char[] hint) {
         this.userInteraction = userInteraction;
         this.answer = answer;
-        this.hint = hint;
+        hintString = new String(hint);
         userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray(); // Copies the answer and replace all characters with _
     }
 
-    public void play() {
+    public void playGame() {
+        boolean endGame = false;
         while(!endGame) {
             if(validateInput())
                 compareToAnswer(guess);
-            if(new String(userAnswer).equals(new String(answer)))
+            if(Arrays.equals(userAnswer,answer))
                 endGame = winGame();
-            else if(wrongGuessCount == maxWrong)
+            else if(wrongGuessCount == MAX_WRONG_GUESS_COUNT)
                 endGame = loseGame();
         }
     }
 
     private boolean validateInput(){
-        validInput = false;
+        boolean validInput = false;
         while (!validInput) {
                 guess = getUserInput();
-                for (int i = 0; i < available.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
-                    if (guess == available[i] && guess != '_') {                        //to signify the character has been used and no longer available
-                        available[i] = '_';
+                for (int i = 0; i < availableCharacters.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
+                    if (guess == availableCharacters[i] && guess != '_') {                        //to signify the character has been used and no longer available
+                        availableCharacters[i] = '_';
                         return true;
                     }
                 }
@@ -52,11 +53,11 @@ public class PlayGame extends UserInteraction{
     }
 
     private void hint(){
-        if(hintCount == 1){
+        if(hintCount == 0){
         wrongGuessCount++;
         DrawHangMan.printMan(wrongGuessCount);
-        userInteraction.displayMessage(new String (hint));
-        hintCount--;
+        userInteraction.displayMessage(hintString);
+        hintCount++;
         }
         else
             userInteraction.displayMessage("Maximum hint limit reached");
@@ -64,7 +65,7 @@ public class PlayGame extends UserInteraction{
 
     private char getUserInput(){
         userInteraction.displayUserAnswer(userAnswer);
-        userInteraction.displayAlphabet(available);
+        userInteraction.displayAlphabet(availableCharacters);
         return userInteraction.enterInput();
     }
 

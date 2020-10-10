@@ -1,11 +1,11 @@
-package com.pbilton.hang_man;
+package com.pbilton.HangMan;
 
 import java.util.Scanner;
 
 public class UserInteraction implements UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
-    public void into(){
+    public void introduction(){
         System.out.println("----------------------");
         System.out.println("        Welcome to Java HangMan!");
         System.out.println();
@@ -48,8 +48,6 @@ public class UserInteraction implements UserInterface {
     public boolean playAgain() {
         System.out.println("Would you like to play again? (Y or N)");
         String play = scanner.next();
-        if (play.equalsIgnoreCase("Y"))
-            return true;
-        return false;
+        return "Y".equalsIgnoreCase(play);
     }
 }

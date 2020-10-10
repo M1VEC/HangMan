@@ -1,8 +1,6 @@
-package com.pbilton.hang_man;
+package com.pbilton.HangMan;
 
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 public class testHangMan {
     private String category = "movies";

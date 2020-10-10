@@ -1,4 +1,4 @@
-package com.pbilton.hang_man;
+package com.pbilton.HangMan;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public class Selection {
     private File file;
     private static char[] answer;
     private static char[] hint;
+    private int random;
 
     public Selection(String category) {
         this.category = category;
@@ -42,12 +43,12 @@ public class Selection {
     }
 
     private void randomSelection() {
-        int random = new Random().nextInt(setFile().length);
+        random = new Random().nextInt(setFile().length);
         selection = source[random].toUpperCase();
 
-        String[] split = selection.split("-");
-        answer = split[0].trim().toCharArray();
-        hint = split[1].trim().toCharArray();
+        String[] separateSelection = selection.split("-");
+        answer = separateSelection[0].trim().toCharArray();
+        hint = separateSelection[1].trim().toCharArray();
     }
 
     public void setSelection(){

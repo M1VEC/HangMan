@@ -1,4 +1,4 @@
-package com.pbilton.hang_man;
+package com.pbilton.HangMan;
 
 public class DrawHangMan {
 
