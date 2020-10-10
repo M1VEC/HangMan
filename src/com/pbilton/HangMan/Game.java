@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Game {
 
-    private final String hintString;
+    private final String hint;
     private char[] answer;
     private char[] userAnswer;
     private char[] availableCharacters = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
@@ -15,10 +15,10 @@ public class Game {
     private static final int MAX_WRONG_GUESS_COUNT = 9;
     private UserInteraction userInteraction;
 
-    public Game(UserInteraction userInteraction, char[] answer, char[] hint) {
+    public Game(UserInteraction userInteraction, char[] answer, String hint) {
         this.userInteraction = userInteraction;
         this.answer = answer;
-        hintString = new String(hint);
+        this.hint = hint;
         userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray(); // Copies the answer and replace all characters with _
     }
 
@@ -56,7 +56,7 @@ public class Game {
         if(hintCount == 0){
         wrongGuessCount++;
         DrawHangMan.printMan(wrongGuessCount);
-        userInteraction.displayMessage(hintString);
+        userInteraction.displayMessage(hint);
         hintCount++;
         }
         else
