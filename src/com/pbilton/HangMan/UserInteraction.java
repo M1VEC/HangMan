@@ -15,13 +15,13 @@ public class UserInteraction implements UserInterface {
     }
 
     @Override
-    public String selectCategory(){
+    public String selectCategory(){             //need to add a way of checking for valid category selection
         System.out.println();
         System.out.println("    Please select a category:");
         System.out.println("        movies");
         System.out.println("        actors");
         System.out.print("    Selection : ");
-        String category = scanner.next().toLowerCase();
+        String category = scanner.next().toLowerCase();         //change category to file name
         return category;
     }
 

@@ -36,22 +36,31 @@ public class Game {
         }
     }
 
-    private boolean validateInput(){
+    private boolean validateInput() {
         boolean validInput = false;
         while (!validInput) {
-                guess = getUserInput();
+            guess = getUserInput();
+            if (guess == '?') {
+                hint();
+                return false;
+            }
+            else
                 for (int i = 0; i < availableCharacters.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
                     if (guess == availableCharacters[i] && guess != '_') {                        //to signify the character has been used and no longer available
                         availableCharacters[i] = '_';
                         return true;
                     }
                 }
-            if(guess == '?')
-                hint();
-            else if (!validInput)
-                userInteraction.displayMessage("Please enter a valid letter! ");
-            }
+            userInteraction.displayMessage("Please enter a valid letter! ");
+        }
         return false;
+    }
+
+
+    private char getUserInput(){
+        userInteraction.displayUserAnswer(userAnswer);
+        userInteraction.displayAlphabet(availableCharacters);
+        return userInteraction.enterInput();
     }
 
     private void hint(){
@@ -63,12 +72,6 @@ public class Game {
         }
         else
             userInteraction.displayMessage("Maximum hint limit reached");
-    }
-
-    private char getUserInput(){
-        userInteraction.displayUserAnswer(userAnswer);
-        userInteraction.displayAlphabet(availableCharacters);
-        return userInteraction.enterInput();
     }
 
     private void compareToAnswer(char guess) {

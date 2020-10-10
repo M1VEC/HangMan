@@ -11,6 +11,7 @@ public class Main {
 
             SelectAnswer selection = new SelectAnswer();
             selection.setAnswer(userInteraction.selectCategory());
+
             Game play = new Game(userInteraction, selection.getAnswer(), selection.getHint());
             play.playGame();
 

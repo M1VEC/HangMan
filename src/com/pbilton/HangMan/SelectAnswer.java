@@ -8,21 +8,26 @@ import java.util.Random;
 public class SelectAnswer {
     private String selection;
     private int random;
+    private File fileSet = null;
 
     public void setAnswer(String category){
-        String[] sourceLine = setFile(category);
-        selection = randomLines(sourceLine);
+        if(setFile(category)) {
+            String[] sourceLine = readFile(fileSet);
+            selection = randomLines(sourceLine);
+        }
     }
 
-    private String[] setFile(String category){
+    private boolean setFile(String category){
         final String dir = System.getProperty("user.dir");
-        File fileSet = null;
         if (category.equals("movies")) {
               fileSet = new File(dir + "\\movieSelection");
+              return true;
         }
-        else if (category.equals("actors"))
+        else if (category.equals("actors")) {
             fileSet = new File(dir + "\\actorsSelection");
-        return readFile(fileSet);
+            return true;
+        }
+        else return false;
     }
 
     private String[] readFile(File file) {
