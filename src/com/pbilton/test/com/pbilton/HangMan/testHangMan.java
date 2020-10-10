@@ -4,19 +4,19 @@ import org.junit.jupiter.api.Test;
 
 public class testHangMan {
     private String category = "movies";
-    Selection movie = new Selection();
+    SelectAnswer selectAnswer = new SelectAnswer();
 
-//    @Test
-//    public void testAnswer() {
-//        movie.setSelection();
-//        System.out.println(movie.getAnswer());
-//    }
-//
-//    @Test
-//    public void testHint() {
-//        movie.setSelection();
-//        System.out.println(movie.getHint());
-//    }
+    @Test
+    public void testAnswer() {
+        selectAnswer.setAnswer("movies");
+        System.out.println(selectAnswer.getAnswer());
+    }
+
+    @Test
+    public void testHint() {
+        selectAnswer.setAnswer("actors");
+        System.out.println(selectAnswer.getHint());
+    }
 
     @Test
     public void testDraw(){

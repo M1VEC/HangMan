@@ -9,8 +9,8 @@ public class Main {
             userInteraction = new UserInteraction();
             userInteraction.introduction();
 
-            Selection selection = new Selection();
-            selection.setSelection(userInteraction.selectCategory());
+            SelectAnswer selection = new SelectAnswer();
+            selection.setAnswer(userInteraction.selectCategory());
             Game playGame = new Game(userInteraction, selection.getAnswer(), selection.getHint());
             playGame.playGame();
 

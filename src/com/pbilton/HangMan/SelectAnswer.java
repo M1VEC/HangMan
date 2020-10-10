@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Selection {
+public class SelectAnswer {
     private String selection;
     private int random;
 
-    public void setSelection(String category){
+    public void setAnswer(String category){
         String[] sourceLine = setFile(category);
-        selection = randomSelection(sourceLine);
+        selection = randomLines(sourceLine);
     }
 
-    private String[] setFile(String category){                             //will add more categories soon
+    private String[] setFile(String category){
         final String dir = System.getProperty("user.dir");
         File fileSet = null;
         if (category.equals("movies")) {
@@ -41,7 +41,7 @@ public class Selection {
         return source;
     }
 
-    private String randomSelection(String[] sourceLines) {
+    private String randomLines(String[] sourceLines) {
         random = new Random().nextInt(sourceLines.length);
         return sourceLines[random].toUpperCase();
     }

@@ -5,13 +5,15 @@ import java.util.Arrays;
 public class Game {
 
     private final String hint;
+    private boolean hintUsed = false;
+
     private char[] answer;
     private char[] userAnswer;
     private char[] availableCharacters = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
     private char guess;
     private int wrongGuessCount = 0;
-    private int hintCount = 0;
     private static final int MAX_WRONG_GUESS_COUNT = 9;
     private UserInteraction userInteraction;
 
@@ -53,11 +55,11 @@ public class Game {
     }
 
     private void hint(){
-        if(hintCount == 0){
+        if(!hintUsed){
         wrongGuessCount++;
         DrawHangMan.printMan(wrongGuessCount);
         userInteraction.displayMessage(hint);
-        hintCount++;
+        hintUsed = true;
         }
         else
             userInteraction.displayMessage("Maximum hint limit reached");
