@@ -8,42 +8,36 @@ import java.util.Random;
 public class SelectAnswer {
     private String selection;
     private int random;
-    private File fileSet = null;
+    private String[] sourceFile = new String[0];
 
-    public void setAnswer(String category){
+    public boolean setAnswer(String category){
         if(setFile(category)) {
-            String[] sourceLine = readFile(fileSet);
-            selection = randomLines(sourceLine);
+            selection = randomLines(sourceFile);
+            return true;
         }
+        return false;
     }
 
     private boolean setFile(String category){
         final String dir = System.getProperty("user.dir");
-        if (category.equals("movies")) {
-              fileSet = new File(dir + "\\movieSelection");
-              return true;
-        }
-        else if (category.equals("actors")) {
-            fileSet = new File(dir + "\\actorsSelection");
-            return true;
-        }
-        else return false;
+        File fileSet = new File(dir + "\\" + category);
+        return readFile(fileSet);
     }
 
-    private String[] readFile(File file) {
+    private boolean readFile(File file) {
         List<String> lines = new ArrayList<String>();
-        String[] source = new String[0];
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String st;
             while ((st = reader.readLine()) != null)
                 lines.add(st);
-            source = lines.toArray(new String[]{});
+            sourceFile = lines.toArray(new String[]{});
         } catch (FileNotFoundException e) {
             System.out.println(file + " file not found!");
+            return false;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return source;
+        return true;
     }
 
     private String randomLines(String[] sourceLines) {
@@ -57,6 +51,5 @@ public class SelectAnswer {
 
     public String getHint() {
         return selection.split("-")[1].trim();
-
     }
 }

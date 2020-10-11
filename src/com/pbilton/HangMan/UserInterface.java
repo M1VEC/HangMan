@@ -4,6 +4,8 @@ public interface UserInterface {
 
      String selectCategory();
 
+     boolean validateCategorySelection(String inputStr, String[] categoryList);
+
      char enterInput();
 
      void displayAlphabet(char[] available);

@@ -10,10 +10,10 @@ public class Main {
             userInteraction.introduction();
 
             SelectAnswer selection = new SelectAnswer();
-            selection.setAnswer(userInteraction.selectCategory());
-
-            Game play = new Game(userInteraction, selection.getAnswer(), selection.getHint());
-            play.playGame();
+            if(selection.setAnswer(userInteraction.selectCategory())) {
+                Game play = new Game(userInteraction, selection.getAnswer(), selection.getHint());
+                play.playGame();
+            }
 
         } while (userInteraction.playAgain());
     }

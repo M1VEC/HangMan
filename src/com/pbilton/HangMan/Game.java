@@ -51,7 +51,7 @@ public class Game {
                         return true;
                     }
                 }
-            userInteraction.displayMessage("Please enter a valid letter! ");
+            userInteraction.displayMessage("****** Please enter a valid letter! ******");
         }
         return false;
     }
@@ -71,7 +71,7 @@ public class Game {
         hintUsed = true;
         }
         else
-            userInteraction.displayMessage("Maximum hint limit reached");
+            userInteraction.displayMessage("****** Maximum hint limit reached ******");
     }
 
     private void compareToAnswer(char guess) {

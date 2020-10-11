@@ -1,9 +1,9 @@
 package com.pbilton.HangMan;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class testHangMan {
-    private String category = "movies";
     SelectAnswer selectAnswer = new SelectAnswer();
 
     @Test
@@ -24,7 +24,14 @@ public class testHangMan {
     }
 
     @Test
-    public void testValidate(){
+    public void testFileTrue(){
+        Assertions.assertTrue(selectAnswer.setAnswer("movies"));
+        Assertions.assertTrue(selectAnswer.setAnswer("actors"));
+    }
 
+    @Test
+    public void testFileFalse(){
+        Assertions.assertFalse(selectAnswer.setAnswer("movie"));
+        Assertions.assertFalse(selectAnswer.setAnswer("actor"));
     }
 }

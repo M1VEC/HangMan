@@ -1,9 +1,11 @@
 package com.pbilton.HangMan;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class UserInteraction implements UserInterface {
     private Scanner scanner = new Scanner(System.in);
+    private String[] categoryList = {"movies", "actors"};
 
     public void introduction(){
         System.out.println("----------------------");
@@ -15,14 +17,24 @@ public class UserInteraction implements UserInterface {
     }
 
     @Override
-    public String selectCategory(){             //need to add a way of checking for valid category selection
+    public String selectCategory(){
         System.out.println();
         System.out.println("    Please select a category:");
-        System.out.println("        movies");
-        System.out.println("        actors");
+        System.out.println("        Movies");
+        System.out.println("        Actors");
         System.out.print("    Selection : ");
-        String category = scanner.next().toLowerCase();         //change category to file name
-        return category;
+        String category = scanner.next().toLowerCase();
+
+        if(validateCategorySelection(category, categoryList))
+            return category;
+        else
+            System.out.println("****** Please enter a valid category! ******");
+            return selectCategory();
+    }
+
+    @Override
+    public boolean validateCategorySelection(String inputStr, String[] categoryList) {
+        return Arrays.stream(categoryList).anyMatch(inputStr::contains);
     }
 
     @Override
