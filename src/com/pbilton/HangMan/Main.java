@@ -1,5 +1,7 @@
 package com.pbilton.HangMan;
 
+import java.io.File;
+
 public class Main {
 
     public static void main(String[] args)  {
@@ -7,10 +9,9 @@ public class Main {
         UserInteraction userInteraction = new UserInteraction();
         SelectAnswer selectAnswer = new SelectAnswer();
         DrawHangMan drawHangMan = new DrawHangMan();
+        userInteraction.introduction();
 
         do {
-            userInteraction.introduction();
-
             if(selectAnswer.setAnswer(userInteraction.selectCategory())) {
                 Game play = new Game(drawHangMan, selectAnswer.getAnswer(), selectAnswer.getHint());
                 play.playGame();

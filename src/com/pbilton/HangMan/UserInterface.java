@@ -1,10 +1,12 @@
 package com.pbilton.HangMan;
 
+import java.util.List;
+
 public interface UserInterface {
 
      String selectCategory();
 
-     boolean validateCategorySelection(String inputStr, String[] categoryList);
+     boolean validateCategorySelection(String inputStr);
 
      char enterInput();
 

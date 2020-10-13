@@ -8,6 +8,7 @@ import java.util.Random;
 public class SelectAnswer {
     private String selection;
     private int random;
+    final String dir = System.getProperty("user.dir");
     private String[] sourceFile = new String[0];
 
     public boolean setAnswer(String category){
@@ -19,8 +20,7 @@ public class SelectAnswer {
     }
 
     private boolean setFile(String category){
-        final String dir = System.getProperty("user.dir");
-        File fileSet = new File(dir + "\\" + category);
+        File fileSet = new File(dir + "\\Category" + "\\" + category);
         return readFile(fileSet);
     }
 

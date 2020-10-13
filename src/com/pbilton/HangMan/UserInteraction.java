@@ -1,11 +1,18 @@
 package com.pbilton.HangMan;
 
-import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserInteraction implements UserInterface {
     private Scanner scanner = new Scanner(System.in);
-    private String[] categoryList = {"movies", "actors"};
+    private List<String> categoryList;
 
     public void introduction(){
         System.out.println("----------------------");
@@ -16,16 +23,30 @@ public class UserInteraction implements UserInterface {
         System.out.println("    it will cost you a wrong guess!");
     }
 
+    private void fileList(){
+        String dir = System.getProperty("user.dir");
+        File folder = new File(dir + "\\Category");
+        try (Stream<Path> list = Files.list(Paths.get(String.valueOf(folder)))) {
+            categoryList = list.filter(path->path.toFile().isFile())
+                    .map(path -> path.getFileName().toString())
+                    .collect(Collectors.toList());
+            categoryList.forEach(System.out::println);
+        } catch (IOException e) {
+            System.out.println("no files found!");
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String selectCategory(){
         System.out.println();
         System.out.println("    Please select a category:");
-        System.out.println("        Movies");
-        System.out.println("        Actors");
-        System.out.print("    Selection : ");
+        fileList();
+        System.out.print("    Selection: ");
+
         String category = scanner.next().toLowerCase();
 
-        if(validateCategorySelection(category, categoryList))
+        if(validateCategorySelection(category))
             return category;
         else
             System.out.println("****** Please enter a valid category! ******");
@@ -33,8 +54,8 @@ public class UserInteraction implements UserInterface {
     }
 
     @Override
-    public boolean validateCategorySelection(String inputStr, String[] categoryList) {
-        return Arrays.stream(categoryList).anyMatch(inputStr::contains);
+    public boolean validateCategorySelection(String inputStr) {
+        return categoryList.contains(inputStr);
     }
 
     @Override
