@@ -12,10 +12,9 @@ public class Game extends UserInteraction {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private int wrongGuessCount = 0;
     private static final int MAX_WRONG_GUESS_COUNT = 9;
-    private DrawHangMan drawHangMan;
+    private DrawHangMan drawHangMan = new DrawHangMan();
 
-    public Game(DrawHangMan drawHangMan, char[] answer, String hint) {
-        this.drawHangMan = drawHangMan;
+    public Game(char[] answer, String hint) {
         this.answer = answer;
         this.hint = hint;
         userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray(); // Copies the answer and replace all characters with _

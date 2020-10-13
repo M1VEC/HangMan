@@ -1,11 +1,16 @@
 package com.pbilton.HangMan;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class SelectAnswer {
+public class SelectAnswer extends UserInteraction{
     private String selection;
     private int random;
     final String dir = System.getProperty("user.dir");
@@ -32,7 +37,7 @@ public class SelectAnswer {
                 lines.add(st);
             sourceFile = lines.toArray(new String[]{});
         } catch (FileNotFoundException e) {
-            System.out.println(file + " file not found!");
+            displayMessage(file + " file not found!");
             return false;
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +48,24 @@ public class SelectAnswer {
     private String randomLines(String[] sourceLines) {
         random = new Random().nextInt(sourceLines.length);
         return sourceLines[random].toUpperCase();
+    }
+
+    private List<String> categoryFileList(){
+        File folder = new File(dir + "\\Category");
+        List<String> categoryList = null;
+        try (Stream<Path> list = Files.list(Paths.get(String.valueOf(folder)))) {
+            categoryList = list.filter(path->path.toFile().isFile())
+                    .map(path -> path.getFileName().toString())
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            displayMessage("no files found!");
+            e.printStackTrace();
+        }
+        return categoryList;
+    }
+
+    public List<String> getCategoryList() {
+        return categoryFileList();
     }
 
     public char[] getAnswer() {

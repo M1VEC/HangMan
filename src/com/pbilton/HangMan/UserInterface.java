@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface UserInterface {
 
-     String selectCategory();
+     String selectCategory(SelectAnswer selectAnswer);
 
-     boolean validateCategorySelection(String inputStr);
+     boolean validateCategorySelection(String category, List<String> categories);
 
      char enterInput();
 

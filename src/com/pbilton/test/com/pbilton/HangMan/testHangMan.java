@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 public class testHangMan {
     SelectAnswer selectAnswer = new SelectAnswer();
-    DrawHangMan drawHangMan = new DrawHangMan();
 
     @Test
     public void testAnswer() {
@@ -16,7 +15,7 @@ public class testHangMan {
     @Test
     public void testValidateInput() {
         char[] testAnswer = "terminator".toUpperCase().toCharArray();
-        Game game = new Game(drawHangMan, testAnswer,"ARNIE");
+        Game game = new Game(testAnswer,"ARNIE");
         Assertions.assertTrue(game.validateInput('E'));
         Assertions.assertTrue(game.validateInput('R'));
         Assertions.assertTrue(game.validateInput('T'));
@@ -27,7 +26,7 @@ public class testHangMan {
     @Test
     public void testCompare() {
         char[] testAnswer = "The Dark Knight".toUpperCase().toCharArray();
-        Game game = new Game(drawHangMan, testAnswer,"Bat");
+        Game game = new Game(testAnswer,"Bat");
         Assertions.assertTrue(game.compareToAnswer('D'));
         Assertions.assertTrue(game.compareToAnswer('A'));
         Assertions.assertFalse(game.compareToAnswer('£'));
