@@ -14,14 +14,24 @@ public class testHangMan {
     }
 
     @Test
-    public void testHint() {
-        selectAnswer.setAnswer("actors");
-        System.out.println(selectAnswer.getHint());
+    public void testValidateInput() {
+        char[] testAnswer = "terminator".toUpperCase().toCharArray();
+        Game game = new Game(drawHangMan, testAnswer,"ARNIE");
+        Assertions.assertTrue(game.validateInput('E'));
+        Assertions.assertTrue(game.validateInput('R'));
+        Assertions.assertTrue(game.validateInput('T'));
+        Assertions.assertFalse(game.validateInput('!'));
+        Assertions.assertFalse(game.validateInput('='));
     }
 
     @Test
-    public void testDraw(){
-    drawHangMan.printMan(5);
+    public void testCompare() {
+        char[] testAnswer = "The Dark Knight".toUpperCase().toCharArray();
+        Game game = new Game(drawHangMan, testAnswer,"Bat");
+        Assertions.assertTrue(game.compareToAnswer('D'));
+        Assertions.assertTrue(game.compareToAnswer('A'));
+        Assertions.assertFalse(game.compareToAnswer('£'));
+        Assertions.assertFalse(game.compareToAnswer('Q'));
     }
 
     @Test

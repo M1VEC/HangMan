@@ -2,23 +2,20 @@ package com.pbilton.HangMan;
 
 import java.util.Arrays;
 
-public class Game extends DrawHangMan{
+public class Game extends UserInteraction {
 
     private final String hint;
     private boolean hintUsed = false;
-
     private char[] answer;
     private char[] userAnswer;
     private char[] availableCharacters = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-
-    private char guess;
     private int wrongGuessCount = 0;
     private static final int MAX_WRONG_GUESS_COUNT = 9;
-    private UserInteraction userInteraction;
+    private DrawHangMan drawHangMan;
 
-    public Game(UserInteraction userInteraction, char[] answer, String hint) {
-        this.userInteraction = userInteraction;
+    public Game(DrawHangMan drawHangMan, char[] answer, String hint) {
+        this.drawHangMan = drawHangMan;
         this.answer = answer;
         this.hint = hint;
         userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray(); // Copies the answer and replace all characters with _
@@ -26,78 +23,83 @@ public class Game extends DrawHangMan{
 
     public void playGame() {
         boolean endGame = false;
+        char guess;
+        boolean validInput;
+
         while(!endGame) {
-            if(validateInput())
+            do {
+                guess = getUserInput();
+                validInput = validateInput(guess);
+            } while (!validInput);
+
+            if(validInput)
                 compareToAnswer(guess);
-            if(Arrays.equals(userAnswer,answer))
+            if (Arrays.equals(userAnswer, answer))
                 endGame = winGame();
-            else if(wrongGuessCount == MAX_WRONG_GUESS_COUNT)
+            else if (wrongGuessCount == MAX_WRONG_GUESS_COUNT)
                 endGame = loseGame();
         }
     }
 
-    private boolean validateInput() {
-        boolean validInput = false;
-        while (!validInput) {
-            guess = getUserInput();
-            if (guess == '?') {
-                hint();
-                return false;
-            }
-            else
-                for (int i = 0; i < availableCharacters.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
-                    if (guess == availableCharacters[i] && guess != '_') {                        //to signify the character has been used and no longer available
-                        availableCharacters[i] = '_';
-                        return true;
-                    }
+    public boolean validateInput(char guess) {          //Should I make this private and create a setter method in order to use Tests or leave this public?
+        if (guess == '?')
+            return hint();
+        else
+            for (int i = 0; i < availableCharacters.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
+                if (guess == availableCharacters[i] && guess != '_') {                        //to signify the character has been used and no longer available
+                    availableCharacters[i] = '_';
+                    return true;
                 }
-            userInteraction.displayMessage("****** Please enter a valid letter! ******");
+            }
+            displayMessage("****** Please enter a valid letter! ******");
+            return false;
+    }
+
+    private char getUserInput(){
+        displayUserAnswer(userAnswer);
+        displayAlphabet(availableCharacters);
+        return enterInput();
+    }
+
+    private boolean hint(){
+        if(!hintUsed){
+            wrongGuess();
+            displayMessage(hint);
+            hintUsed = true;
         }
+        else
+            displayMessage("****** Maximum hint limit reached ******");
         return false;
     }
 
-
-    private char getUserInput(){
-        userInteraction.displayUserAnswer(userAnswer);
-        userInteraction.displayAlphabet(availableCharacters);
-        return userInteraction.enterInput();
-    }
-
-    private void hint(){
-        if(!hintUsed){
-        wrongGuessCount++;
-        printMan(wrongGuessCount);
-        userInteraction.displayMessage(hint);
-        hintUsed = true;
-        }
-        else
-            userInteraction.displayMessage("****** Maximum hint limit reached ******");
-    }
-
-    private void compareToAnswer(char guess) {
+    public boolean compareToAnswer(char guess) {
         boolean letterFound = false;
-        for(int n = 0; n < answer.length; n++){
-            if(guess == answer[n]){                         //checks to see if the users guess is present in the answer at number n
-                userAnswer[n] = guess;
+        for(int n = 0; n < this.answer.length; n++){
+            if(guess == this.answer[n]){                         //checks to see if the users guess is present in the answer at number n
+                this.userAnswer[n] = guess;
                 letterFound = true;
             }
         }
-        if(letterFound == false) {
-            wrongGuessCount++;
-            printMan(wrongGuessCount);
-        }
+        if(letterFound == false)
+            wrongGuess();
+        return letterFound;
+    }
+
+    private void wrongGuess(){
+        wrongGuessCount++;
+        drawHangMan.printMan(wrongGuessCount);
     }
 
     private boolean winGame(){
-        userInteraction.displayAnswer(answer);
-        userInteraction.displayMessage("    Congratulations!");
+        displayAnswer(answer);
+        displayMessage("    Congratulations!");
         return true;
     }
 
     private boolean loseGame(){
-        userInteraction.displayMessage("  Answer is");
-        userInteraction.displayAnswer(answer);
-        userInteraction.displayMessage("  Game Over!");
+        displayMessage("  Answer is");
+        displayAnswer(answer);
+        displayMessage("  Game Over!");
         return true;
     }
 }

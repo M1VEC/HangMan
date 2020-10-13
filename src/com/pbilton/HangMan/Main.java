@@ -4,14 +4,15 @@ public class Main {
 
     public static void main(String[] args)  {
 
-        UserInteraction userInteraction;
+        UserInteraction userInteraction = new UserInteraction();
+        SelectAnswer selectAnswer = new SelectAnswer();
+        DrawHangMan drawHangMan = new DrawHangMan();
+
         do {
-            userInteraction = new UserInteraction();
             userInteraction.introduction();
 
-            SelectAnswer selection = new SelectAnswer();
-            if(selection.setAnswer(userInteraction.selectCategory())) {
-                Game play = new Game(userInteraction, selection.getAnswer(), selection.getHint());
+            if(selectAnswer.setAnswer(userInteraction.selectCategory())) {
+                Game play = new Game(drawHangMan, selectAnswer.getAnswer(), selectAnswer.getHint());
                 play.playGame();
             }
 
