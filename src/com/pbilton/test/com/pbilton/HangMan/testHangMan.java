@@ -16,21 +16,21 @@ public class testHangMan {
     public void testValidateInput() {
         char[] testAnswer = "terminator".toUpperCase().toCharArray();
         Game game = new Game(testAnswer,"ARNIE");
-        Assertions.assertTrue(game.validateInput('E'));
-        Assertions.assertTrue(game.validateInput('R'));
-        Assertions.assertTrue(game.validateInput('T'));
-        Assertions.assertFalse(game.validateInput('!'));
-        Assertions.assertFalse(game.validateInput('='));
+        Assertions.assertTrue(game.getValidInput('E'));
+        Assertions.assertTrue(game.getValidInput('R'));
+        Assertions.assertTrue(game.getValidInput('T'));
+        Assertions.assertFalse(game.getValidInput('!'));
+        Assertions.assertFalse(game.getValidInput('='));
     }
 
     @Test
     public void testCompare() {
         char[] testAnswer = "The Dark Knight".toUpperCase().toCharArray();
         Game game = new Game(testAnswer,"Bat");
-        Assertions.assertTrue(game.compareToAnswer('D'));
-        Assertions.assertTrue(game.compareToAnswer('A'));
-        Assertions.assertFalse(game.compareToAnswer('£'));
-        Assertions.assertFalse(game.compareToAnswer('Q'));
+        Assertions.assertTrue(game.getCompareToAnswer('D'));
+        Assertions.assertTrue(game.getCompareToAnswer('A'));
+        Assertions.assertFalse(game.getCompareToAnswer('£'));
+        Assertions.assertFalse(game.getCompareToAnswer('Q'));
     }
 
     @Test

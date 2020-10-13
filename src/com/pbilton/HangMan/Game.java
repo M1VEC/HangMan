@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class Game extends UserInteraction {
 
     private final String hint;
-    private boolean hintUsed = false;
     private char[] answer;
     private char[] userAnswer;
     private char[] availableCharacters = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
@@ -23,16 +22,22 @@ public class Game extends UserInteraction {
     public void playGame() {
         boolean endGame = false;
         char guess;
-        boolean validInput;
+        boolean validInput = false;
+        boolean hintUsed = false;
 
         while(!endGame) {
             do {
                 guess = getUserInput();
-                validInput = validateInput(guess);
+                if(guess == '?' && hintUsed == false)
+                    hintUsed = hint();
+                else if(guess == '?' && hintUsed == true)
+                    displayMessage("****** Maximum hint limit reached ******");
+                else
+                    validInput = getValidInput(guess);
             } while (!validInput);
 
             if(validInput)
-                compareToAnswer(guess);
+                getCompareToAnswer(guess);
             if (Arrays.equals(userAnswer, answer))
                 endGame = winGame();
             else if (wrongGuessCount == MAX_WRONG_GUESS_COUNT)
@@ -40,18 +45,15 @@ public class Game extends UserInteraction {
         }
     }
 
-    public boolean validateInput(char guess) {          //Should I make this private and create a setter method in order to use Tests or leave this public?
-        if (guess == '?')
-            return hint();
-        else
-            for (int i = 0; i < availableCharacters.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
-                if (guess == availableCharacters[i] && guess != '_') {                        //to signify the character has been used and no longer available
-                    availableCharacters[i] = '_';
-                    return true;
-                }
+    private boolean validateInput(char guess) {
+        for (int i = 0; i < availableCharacters.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
+            if (guess == availableCharacters[i] && guess != '_') {                        //to signify the character has been used and no longer available
+                availableCharacters[i] = '_';
+                return true;
             }
-            displayMessage("****** Please enter a valid letter! ******");
-            return false;
+        }
+        displayMessage("****** Please enter a valid letter! ******");
+        return false;
     }
 
     private char getUserInput(){
@@ -61,27 +63,20 @@ public class Game extends UserInteraction {
     }
 
     private boolean hint(){
-        if(!hintUsed){
-            wrongGuess();
-            displayMessage(hint);
-            hintUsed = true;
-        }
-        else
-            displayMessage("****** Maximum hint limit reached ******");
-        return false;
+        wrongGuess();
+        displayMessage(hint);
+        return true;
     }
 
-    public boolean compareToAnswer(char guess) {
-        boolean letterFound = false;
+    private boolean compareToAnswer(char guess) {
         for(int n = 0; n < this.answer.length; n++){
             if(guess == this.answer[n]){                         //checks to see if the users guess is present in the answer at number n
                 this.userAnswer[n] = guess;
-                letterFound = true;
+                return true;
             }
         }
-        if(letterFound == false)
-            wrongGuess();
-        return letterFound;
+        wrongGuess();
+        return false;
     }
 
     private void wrongGuess(){
@@ -100,6 +95,14 @@ public class Game extends UserInteraction {
         displayAnswer(answer);
         displayMessage("  Game Over!");
         return true;
+    }
+
+    public boolean getCompareToAnswer(char guess){
+        return compareToAnswer(guess);
+    }
+
+    public boolean getValidInput(char guess){
+        return validateInput(guess);
     }
 }
 
