@@ -2,7 +2,7 @@ package com.pbilton.HangMan;
 
 import java.util.Arrays;
 
-public class Game {
+public class Game extends DrawHangMan{
 
     private final String hint;
     private boolean hintUsed = false;
@@ -66,7 +66,7 @@ public class Game {
     private void hint(){
         if(!hintUsed){
         wrongGuessCount++;
-        DrawHangMan.printMan(wrongGuessCount);
+        printMan(wrongGuessCount);
         userInteraction.displayMessage(hint);
         hintUsed = true;
         }
@@ -84,7 +84,7 @@ public class Game {
         }
         if(letterFound == false) {
             wrongGuessCount++;
-            DrawHangMan.printMan(wrongGuessCount);
+            printMan(wrongGuessCount);
         }
     }
 

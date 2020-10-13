@@ -1,13 +1,13 @@
 package com.pbilton.HangMan;
 
 public class DrawHangMan {
-    private static String line1 = "";
-    private static String line2 = "";
-    private static String line3 = "";
-    private static String line4 = "";
-    private static String line5 = "";
+    private String line1 = "";
+    private String line2 = "";
+    private String line3 = "";
+    private String line4 = "";
+    private String line5 = "";
 
-    public static void printMan(int n){
+    public void printMan(int n){
         System.out.println();
         System.out.println("****************************");
         System.out.println("    Incorrect Guess");
@@ -22,7 +22,7 @@ public class DrawHangMan {
         System.out.println("****************************");
     }
 
-    private static void lines(int n){
+    private void lines(int n){
         switch (n){
             case 1:
                 error1();
@@ -54,43 +54,43 @@ public class DrawHangMan {
         }
     }
 
-    private static void error1(){
+    private void error1(){
         line5 = "    ______";
     }
 
-    private static void error2(){
+    private void error2(){
         line2 = "    |";
         line3 = "    |";
         line4 = "    |";
         line5 = "    |______";
     }
 
-    private static void error3(){
+    private void error3(){
         line1 = "     ____";
         line2 = "    |   |";
     }
 
-    private static void error4(){
+    private void error4(){
         line2 = "    |   |O";
     }
 
-    private static void error5(){
+    private void error5(){
         line3 = "    |    |";
     }
 
-    private static void error6(){
+    private void error6(){
         line3 = "    |   /|";
     }
 
-    private static void error7(){
+    private void error7(){
         line3 = "    |   /|\\";
     }
 
-    private static void error8(){
+    private void error8(){
         line4 = "    |   /";
     }
 
-    private static void error9(){
+    private void error9(){
         line4 = "    |   / \\";
     }
 }

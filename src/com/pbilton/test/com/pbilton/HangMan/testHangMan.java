@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class testHangMan {
     SelectAnswer selectAnswer = new SelectAnswer();
+    DrawHangMan drawHangMan = new DrawHangMan();
 
     @Test
     public void testAnswer() {
@@ -20,7 +21,7 @@ public class testHangMan {
 
     @Test
     public void testDraw(){
-    DrawHangMan.printMan(5);
+    drawHangMan.printMan(5);
     }
 
     @Test
