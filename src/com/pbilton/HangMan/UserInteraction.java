@@ -8,22 +8,24 @@ public class UserInteraction implements UserInterface {
 
     public void introduction(){
         displayMessage("----------------------");
-        displayMessage("Welcome to Java HangMan!");
+        displayMessage("\nWelcome to Java HangMan!");
         System.out.println();
-        displayMessage("Find the hidden word from the available letters and numbers");
-        displayMessage("If you need a hint then type \\'?\\' but be warned,");
-        displayMessage("it will cost you a wrong guess!");
+        displayMessage("\nFind the hidden word from the available letters and numbers");
+        displayMessage("\nIf you need a hint then type \\'?\\' but be warned,");
+        displayMessage("\nit will cost you a wrong guess!");
+        displayMessage("\n");
     }
 
     @Override
     public String selectCategory(SelectAnswer selectAnswer){
         System.out.println();
-        displayMessage("Please select a category:");
+        displayMessage("Please select a category:\n");
 
         List<String> categories = selectAnswer.getCategoryList();
-        categories.forEach(System.out::println);
+        for(int i = 0; i<categories.size();i++)
+            displayMessage("\n    " + categories.get(i));
 
-        displayMessage("Selection: ");
+        displayMessage("\n    Selection: ");
         String category = scanner.next().toLowerCase();
         if(validateCategorySelection(category, categories))
             return category;
@@ -46,30 +48,33 @@ public class UserInteraction implements UserInterface {
 
     @Override
     public void displayAlphabet(char[] available) {
-        displayMessage("\nAvailable characters");
+        displayMessage("\nAvailable characters\n");
         for (char letter : available) {
             System.out.print(letter + " ");
         }
     }
 
     @Override
-    public void displayUserAnswer(char[] userAnswer) {
-        System.out.println("\n    " + new String(userAnswer));
+    public void winGameMessage(String answer) {
+        System.out.println("\n    " + answer);
+        System.out.println("\n    " + "Congratulations");
     }
 
     @Override
-    public void displayAnswer(char[] answer) {
-        System.out.println("\n    " + new String(answer));
+    public void loseGameMessage(String answer) {
+        System.out.println("\n    " + "Answer is");
+        System.out.println("\n      " + answer);
+        System.out.println("\n    " + "Game Over!");
     }
 
     @Override
     public void displayMessage(String message) {
-        System.out.println("    " + message);
+        System.out.print("    " + message);
     }
 
     @Override
     public boolean playAgain() {
-        displayMessage("Would you like to play again? (Y or N)");
+        displayMessage("\nWould you like to play again? (Y or N): ");
         String play = scanner.next();
         return "Y".equalsIgnoreCase(play);
     }

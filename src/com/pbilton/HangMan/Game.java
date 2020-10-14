@@ -3,6 +3,7 @@ package com.pbilton.HangMan;
 import java.util.Arrays;
 
 public class Game extends UserInteraction{
+
     private String hint;
     private char[] answer;
     private char[] userAnswer;
@@ -35,7 +36,7 @@ public class Game extends UserInteraction{
     }
 
     private char getUserInput(){
-        displayUserAnswer(userAnswer);
+        displayMessage("\n       " + new String(userAnswer));
         displayAlphabet(availableCharacters);
         return enterInput();
     }
@@ -67,7 +68,7 @@ public class Game extends UserInteraction{
 
     private boolean isHint(char userGuess) {
         if(userGuess == '?'){
-            displayMessage(hint);
+            displayMessage("\n" + hint);
             hint = "****** Maximum hint limit reached ******";
             return true;
         }
@@ -89,17 +90,15 @@ public class Game extends UserInteraction{
     }
 
     private boolean winGame(){
-        displayAnswer(answer);
-        displayMessage("    Congratulations!");
+        winGameMessage(new String(answer));
         return true;
     }
 
     private boolean loseGame(){
-        displayMessage("  Answer is");
-        displayAnswer(answer);
-        displayMessage("  Game Over!");
+        loseGameMessage(new String(answer));
         return true;
     }
+
     public boolean getValidInput(char input){
         return isValidInput(input);
     }

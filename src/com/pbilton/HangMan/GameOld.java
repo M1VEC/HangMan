@@ -45,7 +45,7 @@ public class GameOld extends UserInteraction {
     }
 
     private char getUserInput(){
-        displayUserAnswer(userAnswer);
+//        displayUserAnswer(userAnswer);
         displayAlphabet(availableCharacters);
         return enterInput();
     }
@@ -87,14 +87,14 @@ public class GameOld extends UserInteraction {
     }
 
     private boolean winGame(){
-        displayAnswer(answer);
+//        displayAnswer(answer);
         displayMessage("    Congratulations!");
         return true;
     }
 
     private boolean loseGame(){
         displayMessage("  Answer is");
-        displayAnswer(answer);
+//        displayAnswer(answer);
         displayMessage("  Game Over!");
         return true;
     }
