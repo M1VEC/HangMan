@@ -2,8 +2,9 @@ package com.pbilton.HangMan;
 
 import java.util.Arrays;
 
-public class Game extends UserInteraction{
-    private String hint;
+public class GameOld extends UserInteraction {
+
+    private final String hint;
     private char[] answer;
     private char[] userAnswer;
     private char[] availableCharacters = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
@@ -12,26 +13,35 @@ public class Game extends UserInteraction{
     private static final int MAX_WRONG_GUESS_COUNT = 9;
     private DrawHangMan drawHangMan = new DrawHangMan();
 
-    public Game(char[] answer, String hint) {
+    public GameOld(char[] answer, String hint) {
         this.answer = answer;
         this.hint = hint;
         userAnswer = new String (answer).replaceAll("\\w", "_").toCharArray(); // Copies the answer and replace all characters with _
     }
 
-    public void playGame(){
-        char userGuess = userGuess();
-        compareToAnswer(userGuess);
-        if(!endGame())
-            playGame();
-    }
+    public void playGame() {
+        boolean endGame = false;
+        char guess;
+        boolean isValidInput = false;
+        boolean hintUsed = false;
 
-    private char userGuess(){
-        char userGuess = getUserInput();
-        if(isHint(userGuess))
-            return userGuess();
-        if(!isValidInput(userGuess))
-            return userGuess();
-        return userGuess;
+        while(!endGame) {
+            do {
+                guess = getUserInput();
+                if(guess == '?' && hintUsed == false)
+                    hintUsed = displayHint();
+                else if(guess == '?')
+                    displayMessage("****** Maximum hint limit reached ******");
+                else
+                    isValidInput = validateInput(guess);
+            } while (!isValidInput);
+
+            compareToAnswer(guess);
+            if (Arrays.equals(userAnswer, answer))
+                endGame = winGame();
+            else if (wrongGuessCount == MAX_WRONG_GUESS_COUNT)
+                endGame = loseGame();
+        }
     }
 
     private char getUserInput(){
@@ -40,7 +50,7 @@ public class Game extends UserInteraction{
         return enterInput();
     }
 
-    private boolean isValidInput(char guess) {
+    private boolean validateInput(char guess) {
         for (int i = 0; i < availableCharacters.length; i++) {        //checks to see if entered character is available, if it is it will replace the character with _
             if (guess == availableCharacters[i] && guess != '_') {                        //to signify the character has been used and no longer available
                 availableCharacters[i] = '_';
@@ -52,40 +62,28 @@ public class Game extends UserInteraction{
     }
 
     private boolean compareToAnswer(char guess) {
-        boolean correctCount = false;
+       int correctCount = 0;
         for(int n = 0; n < this.answer.length; n++){
             if(guess == this.answer[n]){                         //checks to see if the users guess is present in the answer at number n
                 this.userAnswer[n] = guess;
-                correctCount = true;
+                correctCount++;
             }
         }
-        if(correctCount)
+        if(correctCount<0)
             return true;
         wrongGuess();
         return false;
     }
 
-    private boolean isHint(char userGuess) {
-        if(userGuess == '?'){
-            displayMessage(hint);
-            hint = "****** Maximum hint limit reached ******";
-            return true;
-        }
-        else
-            return false;
+    private boolean displayHint(){
+        wrongGuess();
+        displayMessage(hint);
+        return true;
     }
 
     private void wrongGuess(){
         wrongGuessCount++;
         drawHangMan.printMan(wrongGuessCount);
-    }
-
-    private boolean endGame(){
-        if (Arrays.equals(userAnswer, answer))
-            return winGame();
-        else if (wrongGuessCount == MAX_WRONG_GUESS_COUNT)
-            return loseGame();
-        return false;
     }
 
     private boolean winGame(){
@@ -100,4 +98,14 @@ public class Game extends UserInteraction{
         displayMessage("  Game Over!");
         return true;
     }
+
+    public boolean getCompareToAnswer(char input){
+        return compareToAnswer(input);
+    }
+
+    public boolean getValidInput(char input){
+        return validateInput(input);
+    }
 }
+
+

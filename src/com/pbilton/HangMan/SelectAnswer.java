@@ -40,7 +40,7 @@ public class SelectAnswer extends UserInteraction{
             displayMessage(file + " file not found!");
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("An unexpected error occurred");
         }
         return true;
     }

@@ -15,7 +15,7 @@ public class testHangMan {
     @Test
     public void testValidateInput() {
         char[] testAnswer = "terminator".toUpperCase().toCharArray();
-        Game game = new Game(testAnswer,"ARNIE");
+        GameOld game = new GameOld(testAnswer,"ARNIE");
         Assertions.assertTrue(game.getValidInput('E'));
         Assertions.assertTrue(game.getValidInput('R'));
         Assertions.assertTrue(game.getValidInput('T'));
@@ -26,7 +26,7 @@ public class testHangMan {
     @Test
     public void testCompare() {
         char[] testAnswer = "The Dark Knight".toUpperCase().toCharArray();
-        Game game = new Game(testAnswer,"Bat");
+        GameOld game = new GameOld(testAnswer,"Bat");
         Assertions.assertTrue(game.getCompareToAnswer('D'));
         Assertions.assertTrue(game.getCompareToAnswer('A'));
         Assertions.assertFalse(game.getCompareToAnswer('£'));
