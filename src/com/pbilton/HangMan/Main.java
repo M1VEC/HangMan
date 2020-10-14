@@ -10,7 +10,6 @@ public class Main {
 
         do {
             if(selectAnswer.setAnswer(userInteraction.selectCategory(selectAnswer))) {
-//                GameOld play = new GameOld(selectAnswer.getAnswer(), selectAnswer.getHint());
                 Game play = new Game(selectAnswer.getAnswer(), selectAnswer.getHint());
                 play.playGame();
             }

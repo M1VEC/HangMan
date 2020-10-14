@@ -100,4 +100,11 @@ public class Game extends UserInteraction{
         displayMessage("  Game Over!");
         return true;
     }
+    public boolean getValidInput(char input){
+        return isValidInput(input);
+    }
+
+    public boolean getCompareToAnswer(char input){
+        return compareToAnswer(input);
+    }
 }
