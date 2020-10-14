@@ -37,10 +37,10 @@ public class SelectAnswer extends UserInteraction{
                 lines.add(st);
             sourceFile = lines.toArray(new String[]{});
         } catch (FileNotFoundException e) {
-            displayMessage(file + " file not found!");
+            displayMessage("\n" + file + " file not found!");
             return false;
         } catch (IOException e) {
-            System.out.println("An unexpected error occurred");
+            displayMessage("\nAn unexpected error occurred");
         }
         return true;
     }
@@ -58,7 +58,7 @@ public class SelectAnswer extends UserInteraction{
                     .map(path -> path.getFileName().toString())
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            displayMessage("no files found!");
+            displayMessage("\nno files found!");
             e.printStackTrace();
         }
         return categoryList;

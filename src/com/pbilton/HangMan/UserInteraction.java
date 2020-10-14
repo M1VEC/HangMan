@@ -30,7 +30,7 @@ public class UserInteraction implements UserInterface {
         if(validateCategorySelection(category, categories))
             return category;
         else
-            displayMessage("****** Please enter a valid category! ******");
+            displayMessage("\n****** Please enter a valid category! ******");
             return selectCategory(selectAnswer);
     }
 
