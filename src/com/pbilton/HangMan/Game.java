@@ -69,6 +69,8 @@ public class Game extends UserInteraction{
     private boolean isHint(char userGuess) {
         if(userGuess == '?'){
             displayMessage("\n" + hint);
+            if(!hint.equals("****** Maximum hint limit reached ******"))
+                wrongGuess();
             hint = "****** Maximum hint limit reached ******";
             return true;
         }

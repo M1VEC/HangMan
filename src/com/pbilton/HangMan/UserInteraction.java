@@ -26,9 +26,14 @@ public class UserInteraction implements UserInterface {
             displayMessage("\n    " + categories.get(i));
 
         displayMessage("\n    Selection: ");
-        String category = scanner.next().toLowerCase();
+        String category = scanner.nextLine().toLowerCase();
+
         if(validateCategorySelection(category, categories))
             return category;
+        else if(category.length() == 0){
+            displayMessage("\n****** Please enter a valid category! ******");
+            return selectCategory(selectAnswer);
+        }
         else
             displayMessage("\n****** Please enter a valid category! ******");
             return selectCategory(selectAnswer);
@@ -42,7 +47,9 @@ public class UserInteraction implements UserInterface {
     @Override
     public char enterInput() {
         displayMessage("\nPlease enter your next letter: ");
-        String input = scanner.next().toUpperCase();
+        String input = scanner.nextLine().toUpperCase();
+        if(input.length() == 0)
+            return enterInput();
         return input.charAt(0);
     }
 
