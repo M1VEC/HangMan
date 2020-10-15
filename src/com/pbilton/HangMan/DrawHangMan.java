@@ -1,6 +1,6 @@
 package com.pbilton.HangMan;
 
-public class DrawHangMan {
+public class DrawHangMan extends UserInteraction {
     private String line1 = "";
     private String line2 = "";
     private String line3 = "";
@@ -9,17 +9,17 @@ public class DrawHangMan {
 
     public void printMan(int n){
         System.out.println();
-        System.out.println("****************************");
-        System.out.println("    Incorrect Guess");
+        displayMessage("\n****************************");
+        displayMessage("\n    Incorrect Guess");
 
         lines(n);
 
-        System.out.println(line1);
-        System.out.println(line2);
-        System.out.println(line3);
-        System.out.println(line4);
-        System.out.println(line5);
-        System.out.println("****************************");
+        displayMessage("\n" + line1);
+        displayMessage("\n" + line2);
+        displayMessage("\n" + line3);
+        displayMessage("\n" + line4);
+        displayMessage("\n" + line5);
+        displayMessage("\n****************************");
     }
 
     private void lines(int n){

@@ -20,18 +20,18 @@ public class Game extends UserInteraction{
     }
 
     public void playGame(){
-        char userGuess = userGuess();
+        char userGuess = userInput();
         compareToAnswer(userGuess);
         if(!endGame())
             playGame();
     }
 
-    private char userGuess(){
+    private char userInput(){
         char userGuess = getUserInput();
         if(isHint(userGuess))
-            return userGuess();
+            return userInput();
         if(!isValidInput(userGuess))
-            return userGuess();
+            return userInput();
         return userGuess;
     }
 
