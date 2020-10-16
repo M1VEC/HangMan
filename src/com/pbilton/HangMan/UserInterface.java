@@ -12,11 +12,11 @@ public interface UserInterface {
 
      void displayAlphabet(char[] available);
 
-    void winGameMessage(String answer);
+     void winGameMessage(String answer);
 
-    void loseGameMessage(String answer);
+     void loseGameMessage(String answer);
 
-    void displayMessage(String message);
+     void displayMessage(String message);
 
      boolean playAgain();
 }
