@@ -1,18 +1,28 @@
 # HangMan
-Goal is to create a movie themed HangMan from scratch
+Goals:
 
-It will select a movie at random from a list - complete
+Create a movie themed HangMan from scratch
 
-It will show the user the correct amount of letters marked as blanks - complete
+It will select a word or name at random from a list 
 
-It will show the user all the letters from the alphabet - complete 
+It will show the user the correct amount of letters marked as blanks
 
-It will keep track all correct letters guessed - complete
+It will show the user all the letters from the alphabet 
 
-It will at the end of every guess redraw the HangMan - draws after each incorrect guess
+It will keep track all correct letters guessed 
 
-It will allow the user to guess the film before the start of a new guess
+It will at every wrong guess redraw the HangMan - draws after each incorrect guess
 
-It could give the user one hint per movie - complete
+It will give the user one hint per movie 
 
 It should be expandable 
+
+******************************
+Select a category from Movies or Actors
+Take turns at guessing correct characters until you win or run out of go's
+******************************
+You can add your own topics by placing a text file in the catergory folder with the format:
+name - hint       
+On each new line. Be sure to add the -
+Not case sensative
+******************************
